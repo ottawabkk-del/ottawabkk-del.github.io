@@ -1,0 +1,105 @@
+/* Ottawa Bookkeeping Studio extras: contact strip, menu that stays at the top,
+   scroll effects, enquiry form, side tab and pop-out panel. */
+html{scroll-padding-top:150px}
+body{overflow-x:clip}
+.obs-topbar{position:sticky;top:0;z-index:42}
+@media(min-width:760px){
+  .obs-sticky{position:sticky;top:var(--obs-tb,52px);z-index:40;transition:box-shadow .25s ease}
+  .obs-sticky.obs-scrolled{box-shadow:0 8px 28px rgba(14,23,38,.09)}
+}
+.obs-topbar a:hover{text-decoration:underline!important}
+@media(max-width:700px){.obs-tag{display:none!important}}
+@media(max-width:480px){.obs-topbar [data-obs-open]{display:none!important}}
+
+/* scroll effects (classes are added by site.js, so nothing is hidden without it) */
+.obs-rv{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
+.obs-rv.obs-l{transform:translateX(-32px)}
+.obs-rv.obs-r{transform:translateX(32px)}
+.obs-rv.obs-in{opacity:1;transform:none}
+.obs-tick{opacity:0;transform:translateX(16px);transition:opacity .45s ease,transform .45s ease}
+.obs-tick.obs-in{opacity:1;transform:none}
+.obs-tick svg path{stroke-dasharray:16;stroke-dashoffset:16;transition:stroke-dashoffset .45s ease}
+.obs-tick.obs-in svg path{stroke-dashoffset:0}
+@media(max-width:700px){
+  .obs-rv.obs-l,.obs-rv.obs-r{transform:translateY(24px)}
+  .obs-tick{transform:translateY(10px)}
+}
+
+/* form card */
+.obs-card{background:#FFFFFF;color:#0E1726;border-radius:20px;padding:28px;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+.obs-card.obs-soft{background:#F3F5F9}
+.obs-card>h2{margin:0 0 6px;font-family:"Space Grotesk",sans-serif;font-size:24px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.obs-card>p{margin:0 0 18px;color:#3B4657;font-size:16px;line-height:1.5}
+.obs-form{display:grid;gap:14px;font-family:Inter,system-ui,sans-serif;color:#0E1726}
+.obs-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;align-items:end}
+.obs-form label{display:grid;gap:6px;font-size:15px;font-weight:600;line-height:1.3}
+.obs-form label em{font-style:normal;font-weight:400;color:#56606E}
+.obs-form input,.obs-form textarea,.obs-form select{font:inherit;font-size:16px;font-weight:400;color:#0E1726;background:#FFFFFF;border:1.5px solid #C9D1DE;border-radius:12px;padding:11px 14px;min-height:48px;width:100%;box-sizing:border-box}
+.obs-form textarea{min-height:96px;resize:vertical}
+.obs-form input:focus,.obs-form textarea:focus,.obs-form select:focus{outline:none;border-color:#2A7D76;box-shadow:0 0 0 3px rgba(42,125,118,.2)}
+.obs-form [aria-invalid="true"]{border-color:#B42318}
+.obs-form button{justify-self:start;font:inherit;font-weight:600;font-size:16px;color:#FFFFFF;background:#2A7D76;border:0;border-radius:999px;padding:14px 28px;min-height:48px;cursor:pointer}
+.obs-form button:hover{background:#22675F}
+.obs-form button[disabled]{opacity:.6;cursor:progress}
+.obs-note{margin:0;font-size:14px;color:#56606E}
+.obs-err{margin:0;font-size:14px;font-weight:500;color:#B42318}
+.obs-err a{color:#B42318}
+.obs-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0}
+.obs-done{font-family:Inter,system-ui,sans-serif;outline:none;padding:4px 0}
+.obs-done h3{margin:0 0 6px;font-family:"Space Grotesk",sans-serif;font-size:24px}
+.obs-done p{margin:0;color:#3B4657}
+
+/* side tab and pop-out panel */
+.obs-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;writing-mode:vertical-rl;background:#2A7D76;color:#FFFFFF;border:0;border-radius:12px 0 0 12px;padding:20px 12px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;box-shadow:-4px 8px 22px rgba(14,23,38,.2)}
+.obs-tab:hover{background:#22675F}
+@media(max-width:700px){.obs-tab{writing-mode:horizontal-tb;top:auto;bottom:16px;right:16px;transform:none;border-radius:999px;padding:14px 22px}}
+.obs-scrim{position:fixed;inset:0;background:rgba(14,23,38,.5);z-index:70;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.obs-panel{position:fixed;top:0;right:0;bottom:0;width:min(460px,100vw);background:#FFFFFF;color:#0E1726;z-index:80;transform:translateX(105%);transition:transform .35s cubic-bezier(.2,.7,.2,1);overflow-y:auto;padding:30px 26px 34px;box-sizing:border-box;box-shadow:-14px 0 44px rgba(14,23,38,.2);font-family:Inter,system-ui,sans-serif}
+.obs-panel .obs-k{margin:0 0 8px;font-size:15px;font-weight:600;color:#2A7D76}
+.obs-panel h2{margin:0 0 8px;font-family:"Space Grotesk",sans-serif;font-size:30px;line-height:1.05;letter-spacing:-.025em}
+.obs-panel .obs-lead{margin:0 0 22px;color:#3B4657;font-size:16px}
+.obs-panel .obs-alt{margin:22px 0 0;font-size:15px;color:#3B4657}
+.obs-panel .obs-alt a{color:#0E1726;font-weight:600}
+.obs-x{position:absolute;top:14px;right:14px;width:44px;height:44px;border:0;border-radius:50%;background:#F3F5F9;color:#0E1726;font-size:24px;line-height:1;cursor:pointer}
+.obs-open .obs-scrim{opacity:1;pointer-events:auto}
+.obs-open .obs-panel{transform:none}
+.obs-open{overflow:hidden}
+@media(prefers-reduced-motion:reduce){.obs-panel,.obs-scrim,.obs-sticky{transition:none}}
+
+/* drop-down menus */
+.obs-dd{position:relative;display:inline-flex}
+.obs-dd-top{display:inline-flex;align-items:center;gap:5px;padding:6px 0}
+.obs-caret{transition:transform .2s ease}
+.obs-dd-menu{position:absolute;top:100%;left:-14px;min-width:240px;padding:8px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;box-shadow:0 18px 40px rgba(14,23,38,.14);display:grid;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;z-index:50}
+.obs-dd-menu a{display:block;padding:10px 12px;border-radius:10px;color:#0E1726;text-decoration:none;font-size:15px;font-weight:500;white-space:nowrap}
+.obs-dd-menu a:hover,.obs-dd-menu a:focus-visible{background:#F3F5F9;color:#2A7D76}
+.obs-dd:hover .obs-dd-menu,.obs-dd:focus-within .obs-dd-menu{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.obs-dd:hover .obs-caret,.obs-dd:focus-within .obs-caret{transform:rotate(180deg)}
+
+/* service cards */
+.obs-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.obs-scard{display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border-radius:20px;padding:28px;text-decoration:none;color:#0E1726;border:1px solid #E3E8F0;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.obs-scard:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(14,23,38,.12);border-color:#2A7D76}
+.obs-ic{width:56px;height:56px;border-radius:16px;background:#E3F1EF;color:#2A7D76;display:grid;place-items:center;margin-bottom:6px;transition:background .25s ease,color .25s ease}
+.obs-scard:hover .obs-ic{background:#2A7D76;color:#FFFFFF}
+.obs-st{font-family:"Space Grotesk",sans-serif;font-size:23px;font-weight:700;letter-spacing:-.015em;line-height:1.15}
+.obs-sd{color:#3B4657;flex:1}
+.obs-more{font-weight:600;color:#2A7D76}
+
+/* back to top */
+.obs-top{position:fixed;right:20px;bottom:20px;z-index:55;width:48px;height:48px;border-radius:50%;border:0;background:#0E1726;color:#FFFFFF;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 22px rgba(14,23,38,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s}
+.obs-top.obs-show{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+@media(max-width:700px){.obs-top{left:16px;right:auto;bottom:16px}}
+@media(prefers-reduced-motion:reduce){.obs-scard,.obs-dd-menu,.obs-top{transition:none}}
+
+/* photo backgrounds and photo cards */
+.obs-herobg{position:relative;background-color:#FFFFFF;background-position:center;background-size:cover;background-repeat:no-repeat}
+.obs-herobg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.93) 42%,rgba(255,255,255,.6) 100%);pointer-events:none}
+.obs-herobg>section{position:relative}
+.obs-herobg [data-obs-static] .obs-card{background:#FFFFFF;box-shadow:0 24px 60px rgba(14,23,38,.16)}
+@media(min-width:900px) and (pointer:fine){.obs-herobg{background-attachment:fixed}}
+@media(max-width:899px){.obs-herobg::before{background:rgba(255,255,255,.9)}}
+.obs-scard{overflow:hidden}
+.obs-ph{display:block;width:calc(100% + 56px);max-width:none;height:190px;margin:-28px -28px 0;object-fit:cover;background:#E3E8F0;transition:transform .5s ease}
+.obs-scard:hover .obs-ph{transform:scale(1.05)}
+.obs-scard .obs-ic{margin-top:-30px;position:relative;border:4px solid #FFFFFF;box-sizing:content-box}
