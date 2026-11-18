@@ -97,12 +97,13 @@ body{overflow-x:clip}
 @media(prefers-reduced-motion:reduce){.obs-scard,.obs-dd-menu,.obs-top{transition:none}}
 
 /* photo backgrounds and photo cards */
-.obs-herobg{position:relative;background-color:#FFFFFF;background-position:center;background-size:cover;background-repeat:no-repeat}
+.obs-herobg{position:relative;background-color:#FFFFFF;background-image:var(--bg);background-position:center;background-size:cover;background-repeat:no-repeat}
 .obs-herobg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.93) 42%,rgba(255,255,255,.6) 100%);pointer-events:none}
 .obs-herobg>section{position:relative}
 .obs-herobg [data-obs-static] .obs-card{background:#FFFFFF;box-shadow:0 24px 60px rgba(14,23,38,.16)}
 @media(min-width:900px) and (pointer:fine){.obs-herobg{background-attachment:fixed}}
 @media(max-width:899px){.obs-herobg::before{background:rgba(255,255,255,.9)}}
+@media(min-width:900px){.obs-herobg{background-image:var(--bg-l)}}
 .obs-scard{overflow:hidden}
 .obs-ph{display:block;width:calc(100% + 56px);max-width:none;height:190px;margin:-28px -28px 0;object-fit:cover;background:#E3E8F0;transition:transform .5s ease}
 .obs-scard:hover .obs-ph{transform:scale(1.05)}
