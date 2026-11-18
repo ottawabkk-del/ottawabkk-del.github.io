@@ -8,6 +8,21 @@
   var F = { name: 'entry.1389207575', email: 'entry.378230464', phone: 'entry.556737337', need: 'entry.2053659030', heard: 'entry.563811724' };
   var HEARD = ['Google search', 'Google Maps', 'Referral from a client', 'Referral from an accountant', 'LinkedIn', 'Other'];
   var PREVIEW = window.OBS_PREVIEW === true;
+  var CONV = { form: 'AW-17731713019/JV7KCOjY-7odEPvvkYdC', book: 'AW-17731713019/h3NvCOvY-7odEPvvkYdC', contact: 'AW-17731713019/8EbbCN3shLsdEPvvkYdC' };
+
+  /* Google Ads conversion events: form sent, intro call booking link, phone or email link */
+  function conv(k) {
+    try { if (!PREVIEW && typeof window.gtag === 'function') window.gtag('event', 'conversion', { send_to: CONV[k] }); } catch (e) { /* ignore */ }
+  }
+  function trackClicks() {
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      if (/^(tel|mailto):/i.test(h)) conv('contact');
+      else if (h.indexOf('calendar.google.com') > -1) conv('book');
+    }, true);
+  }
 
   function el(tag, cls, html) {
     var e = document.createElement(tag);
@@ -193,7 +208,7 @@
     var body = new URLSearchParams();
     ['name', 'email', 'phone', 'need', 'heard'].forEach(function (k) { body.append(F[k], val(f, k)); });
     fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: body })
-      .then(function () { finish(f, false); })
+      .then(function () { conv('form'); finish(f, false); })
       .catch(function () {
         btn.disabled = false;
         btn.textContent = 'Send message';
@@ -287,6 +302,7 @@
 
   function start() {
     try {
+      trackClicks();
       sticky();
       [].forEach.call(document.querySelectorAll('form.obs-form'), function (f) { f.addEventListener('submit', submit); });
       panel();
