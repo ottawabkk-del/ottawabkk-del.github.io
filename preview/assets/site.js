@@ -222,7 +222,7 @@
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-modal', 'true');
     box.setAttribute('aria-labelledby', 'obs-pt');
-    box.setAttribute('aria-hidden', 'true');
+    box.inert = true;
     box.innerHTML =
       '<button type="button" class="obs-x" aria-label="Close">&times;</button>' +
       '<p class="obs-k">Quick enquiry</p>' +
@@ -242,12 +242,12 @@
       if (e) e.preventDefault();
       last = document.activeElement;
       document.documentElement.classList.add('obs-open');
-      box.setAttribute('aria-hidden', 'false');
+      box.inert = false;
       setTimeout(function () { var i = box.querySelector('input,textarea,button.obs-x'); if (i) i.focus(); }, 60);
     }
     function close() {
       document.documentElement.classList.remove('obs-open');
-      box.setAttribute('aria-hidden', 'true');
+      box.inert = true;
       if (last && last.focus) last.focus();
     }
     tab.addEventListener('click', open);
