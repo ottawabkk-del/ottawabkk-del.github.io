@@ -212,7 +212,7 @@
       .catch(function () {
         btn.disabled = false;
         btn.textContent = 'Send message';
-        err.innerHTML = 'That didn\'t go through. Please email <a href="mailto:ottawa.bkk@gmail.com">ottawa.bkk@gmail.com</a> or call 819-213-0203.';
+        err.innerHTML = 'That didn\'t go through. Please email <a href="mailto:ottawa.bkk@gmail.com">ottawa.bkk@gmail.com</a> or call 613-974-6969.';
         err.hidden = false;
       });
   }
@@ -244,7 +244,7 @@
       '<h2 id="obs-pt">Tell me what you need</h2>' +
       '<p class="obs-lead">I reply within 1 business day. You\'ll get a fixed quote before any work starts.</p>';
     box.appendChild(buildForm());
-    box.appendChild(el('p', 'obs-alt', 'Prefer to talk? Call <a href="tel:+18192130203">819-213-0203</a>, Monday to Friday.'));
+    box.appendChild(el('p', 'obs-alt', 'Prefer to talk? Call <a href="tel:+16139746969">613-974-6969</a>, Monday to Friday.'));
     var tab = el('button', 'obs-tab', 'Quick enquiry');
     tab.type = 'button';
     tab.setAttribute('aria-haspopup', 'dialog');
